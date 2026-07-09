@@ -43,7 +43,25 @@ A premium, high-performance, standalone desktop utility suite. Optimized for nat
   4. Click the swap button (`⇆`) if you want to invert the search and replace values.
   5. Click **REPLACE** to apply. A beep sound will confirm the successful replacement.
 
-### 3. DLL Injector
+### 3. AoB Refiner / Pattern Comparer
+Automatically generates a refined wildcard AoB pattern by reading and cross-comparing raw memory bytes from multiple locations. It accepts two input modes:
+
+- **Address Mode**: Paste a list of Cheat Engine-style memory addresses (one per line, e.g., `0x1A2B3C4D5E6F`). The tool reads a configurable block of bytes at each address from the live process, then compares all blocks side-by-side — bytes that are identical across all addresses are kept, differing bytes are automatically replaced with `??`.
+- **AOB Pattern Mode**: Paste an existing AoB search pattern (hex bytes optionally containing `?` / `??` wildcards). The refiner scans the target process memory for all instances of that pattern, reads a byte block the same length as the pattern at every matching address, and performs the same cross-comparison to produce a tighter, more unique wildcard signature.
+
+**Configuration Options**:
+- **Read Length** (Address Mode): How many bytes to read at each address — `32`, `64`, `128`, `256`, or `512` bytes.
+- **Line Width**: Display width of the generated pattern output — `16` or `32` bytes per row (cosmetic, does not affect the exported pattern).
+
+**How to Use**:
+1. Input the target process name or click **SELECT** to pick from the active process list.
+2. Paste your memory addresses or existing AoB pattern into the **Byte Sequences / AOB Input** box.
+3. Select the desired **Read Length** and **Line Width** from the dropdowns.
+4. Click **REFINE AOB**. The tool processes in a background thread and shows a notification when done.
+5. The generated wildcard pattern appears in the **Generated Wildcard AOB** output box (read-only, fully selectable and copyable).
+6. Optionally click **EXPORT** to save the raw single-line pattern to `output.txt` next to the executable. File Explorer will automatically open and highlight the exported file.
+
+### 4. DLL Injector
 - **How to Use**:
   1. Choose your target process.
   2. Click **ADD DLL**. This launches the native Windows File Explorer dialog.
